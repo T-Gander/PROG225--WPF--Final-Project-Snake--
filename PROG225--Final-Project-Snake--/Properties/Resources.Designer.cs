@@ -69,5 +69,15 @@ namespace PROG225__Final_Project_Snake__.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] settingscog {
+            get {
+                object obj = ResourceManager.GetObject("settingscog", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }
