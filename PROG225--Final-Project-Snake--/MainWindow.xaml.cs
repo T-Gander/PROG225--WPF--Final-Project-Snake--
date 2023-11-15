@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PROG225__Final_Project_Snake__.Pages;
 
 namespace PROG225__Final_Project_Snake__
 {
@@ -23,13 +24,8 @@ namespace PROG225__Final_Project_Snake__
         public MainWindow()
         {
             InitializeComponent();
-            //Creates 100x100 grid.
-            const int n = 100;
-            for (int i = 0; i < n; ++i)
-            {
-                Grid.ColumnDefinitions.Add(new ColumnDefinition());
-                Grid.RowDefinitions.Add(new RowDefinition());
-            }
+
+            Content = new MainMenu();
         }
     }
 }
