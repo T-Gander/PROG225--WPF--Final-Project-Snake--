@@ -12,8 +12,8 @@
         <Grid.Background>
             <VisualBrush>
                 <VisualBrush.Visual>
-                    <StackPanel Background="White">
-                        <MediaElement Source="Videos/static.mp4" Opacity="0.9"></MediaElement>
+                    <StackPanel Background="Black">
+                        <MediaElement x:Name="backgroundVideo" Source="Videos/static.mp4" Opacity="0.9"/>
                     </StackPanel>
                 </VisualBrush.Visual>
             </VisualBrush>
