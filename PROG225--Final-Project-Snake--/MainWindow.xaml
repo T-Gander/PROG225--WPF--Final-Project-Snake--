@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PROG225__Final_Project_Snake__"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid x:Name="Grid">
+        Title="Snake Game PROG225" Height="450" Width="800">
+    <Grid>
 
     </Grid>
 </Window>

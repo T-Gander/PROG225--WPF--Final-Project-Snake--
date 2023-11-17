@@ -24,8 +24,8 @@ namespace PROG225__Final_Project_Snake__
         public MainWindow()
         {
             InitializeComponent();
-
-            Content = new MainMenu();
+            GameController.MainWindow = this;
+            GameController.UpdateContent();
         }
     }
 }

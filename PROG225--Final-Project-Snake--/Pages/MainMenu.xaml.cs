@@ -48,5 +48,11 @@ namespace PROG225__Final_Project_Snake__.Pages
 
             Debug.WriteLine($"{videoCount}");
         }
+
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            GameController.CurrentContent = new GameScreen();
+            GameController.UpdateContent();
+        }
     }
 }
