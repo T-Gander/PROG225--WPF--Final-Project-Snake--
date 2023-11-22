@@ -8,10 +8,11 @@ namespace PROG225__Final_Project_Snake__
 {
     public class SnakeHead : SnakeBase
     {
-        public SnakeHead() 
+        public SnakeHead(int x, int y) 
         {
             SnakeBounds = BuildBody();
+            XLocation = x;
+            YLocation = y;
         }
-
     }
 }

@@ -23,13 +23,13 @@ namespace PROG225__Final_Project_Snake__.Pages
     /// </summary>
     public partial class MainMenu : Page
     {
-        static DispatcherTimer videoTimer;
-        int videoCount = 0;
+        private static DispatcherTimer videoTimer;
+        private int videoCount = 0;
 
         public MainMenu()
         {
             InitializeComponent();
-
+            backgroundVideo.Play();
             videoTimer = new DispatcherTimer();
             videoTimer.Interval = new TimeSpan(0,0,1);
             videoTimer.Tick += VideoTimer_Tick;
@@ -53,6 +53,8 @@ namespace PROG225__Final_Project_Snake__.Pages
         {
             GameController.CurrentContent = new GameScreen();
             GameController.UpdateContent();
+            backgroundVideo.Stop();
+            videoTimer.Stop();
         }
     }
 }

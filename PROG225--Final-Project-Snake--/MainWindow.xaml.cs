@@ -26,6 +26,54 @@ namespace PROG225__Final_Project_Snake__
             InitializeComponent();
             GameController.MainWindow = this;
             GameController.UpdateContent();
+            PreviewKeyDown += GameScreen_KeyDown;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            KeyDown += new KeyEventHandler(GameScreen_KeyDown);
+        }
+
+        private void GameScreen_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Need to update code to wait until next tick to update speed, because if you are quick enough you can kill yourself.
+
+            switch (e.Key)
+            {
+                case Key.Up:
+                    if (Snake.Player.YSpeed != 1)
+                    {
+                        Snake.Player.XSpeed = 0;
+                        Snake.Player.YSpeed = -1;
+                    }
+                    break;
+
+                case Key.Down:
+                    if (Snake.Player.YSpeed != -1)
+                    {
+                        Snake.Player.XSpeed = 0;
+                        Snake.Player.YSpeed = 1;
+                    }
+                    break;
+
+                case Key.Left:
+                    if (Snake.Player.XSpeed != 1)
+                    {
+                        Snake.Player.YSpeed = 0;
+                        Snake.Player.XSpeed = -1;
+                    }
+                    break;
+
+                case Key.Right:
+                    if (Snake.Player.XSpeed != -1)
+                    {
+                        Snake.Player.XSpeed = 1;
+                        Snake.Player.YSpeed = 0;
+                    }
+                    break;
+
+                default: break;
+            }
         }
     }
 }

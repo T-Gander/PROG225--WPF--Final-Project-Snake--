@@ -13,7 +13,7 @@
             <VisualBrush>
                 <VisualBrush.Visual>
                     <StackPanel Background="Black">
-                        <MediaElement x:Name="backgroundVideo" Source="Videos/static.mp4" Opacity="0.9"/>
+                        <MediaElement x:Name="backgroundVideo" Source="Videos/static.mp4" Opacity="0.9" LoadedBehavior="Manual"/>
                     </StackPanel>
                 </VisualBrush.Visual>
             </VisualBrush>

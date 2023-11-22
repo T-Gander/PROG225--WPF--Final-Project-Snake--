@@ -28,7 +28,22 @@ namespace PROG225__Final_Project_Snake__
         public SnakeBase() 
         {
             SnakeBounds = BuildBody();
+            GameController.MovementEvent += Move;
         }
 
+        protected void Move()
+        {
+            XLocation += XSpeed;
+            YLocation += YSpeed;
+
+            if(XLocation > GameScreen.GameGrid.ColumnDefinitions.Count ||  YLocation > GameScreen.GameGrid.RowDefinitions.Count
+                || XLocation < 0 || YLocation < 0)
+            {
+                GameController.GameOver();
+            }
+
+            Grid.SetColumn(SnakeBounds, XLocation);
+            Grid.SetRow(SnakeBounds, YLocation);
+        }
     }
 }

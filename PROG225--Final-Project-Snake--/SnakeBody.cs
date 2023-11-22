@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PROG225__Final_Project_Snake__
 {
-    class SnakeBody : SnakeBase
+    public class SnakeBody : SnakeBase
     {
     }
 }

@@ -20,32 +20,32 @@ namespace PROG225__Final_Project_Snake__
         public static object? CurrentContent { get; set; } = new MainMenu();
         public static Window? MainWindow { get; set; }
         public static Brush GameBackground { get; set; } = Brushes.DimGray;
-        public static DispatcherTimer? MovementTimer;
+        public static Timer? MovementTimer;
 
         public enum Difficulty { Easy, Normal, Hard }
 
         public static Difficulty GameDifficulty { get; set; } = Difficulty.Normal;
 
-        private static TimeSpan GetDifficulty()
+        private static double GetDifficulty()
         {
             switch (GameDifficulty)
             {
                 case Difficulty.Easy:
-                    return new TimeSpan(1500);
+                    return 150;
 
                 case Difficulty.Hard:
-                    return new TimeSpan(500);
+                    return 75;
 
                 default:
-                    return new TimeSpan(1000);
+                    return 125;
             }
         }
 
         public static void CreateTimer()
         {
-            MovementTimer = new DispatcherTimer();
+            MovementTimer = new Timer();
             MovementTimer.Interval = GetDifficulty();
-            MovementTimer.Tick += MovementTimer_Tick;
+            MovementTimer.Elapsed += MovementTimer_Tick;
             MovementTimer.Start();
         }
 
@@ -65,17 +65,26 @@ namespace PROG225__Final_Project_Snake__
         public static Grid BuildGameGrid()
         {
             Grid newGrid = new Grid();
-            int n = 100;
-            for (int i = 0; i < n; ++i)
+            int w =80;
+            for (int i = 0; i < w; ++i)
             {
                 newGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            }
+
+            int h = 45;
+            for(int i = 0; i<h; i++)
+            {
                 newGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            newGrid.Background = Brushes.DimGray;
-
+            newGrid.Background = Brushes.Azure;
 
             return newGrid;
+        }
+
+        public static void GameOver()
+        {
+
         }
     }
 }
