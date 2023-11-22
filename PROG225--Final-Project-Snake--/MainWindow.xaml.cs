@@ -46,6 +46,7 @@ namespace PROG225__Final_Project_Snake__
                     {
                         Snake.Player.XSpeed = 0;
                         Snake.Player.YSpeed = -1;
+                        Snake.CreateSnakeNode();
                     }
                     break;
 
@@ -54,6 +55,7 @@ namespace PROG225__Final_Project_Snake__
                     {
                         Snake.Player.XSpeed = 0;
                         Snake.Player.YSpeed = 1;
+                        Snake.CreateSnakeNode();
                     }
                     break;
 
@@ -62,6 +64,7 @@ namespace PROG225__Final_Project_Snake__
                     {
                         Snake.Player.YSpeed = 0;
                         Snake.Player.XSpeed = -1;
+                        Snake.CreateSnakeNode();
                     }
                     break;
 
@@ -70,6 +73,7 @@ namespace PROG225__Final_Project_Snake__
                     {
                         Snake.Player.XSpeed = 1;
                         Snake.Player.YSpeed = 0;
+                        Snake.CreateSnakeNode();
                     }
                     break;
 

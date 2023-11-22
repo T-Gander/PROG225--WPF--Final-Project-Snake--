@@ -10,5 +10,11 @@ namespace PROG225__Final_Project_Snake__
     {
         public static SnakeHead Player;
         public static List<SnakeBody> Body = new List<SnakeBody>();
+
+        public static void CreateSnakeNode()
+        {
+            SnakeNode snakeNode = new SnakeNode(Player.XLocation, Player.YLocation, Player.XSpeed, Player.YSpeed);
+            GameScreen.GameGrid.Children.Add(snakeNode.SnakeBounds);
+        }
     }
 }
