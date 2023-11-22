@@ -48,17 +48,27 @@ namespace PROG225__Final_Project_Snake__
 
             Grid.SetRow(Snake.Player.SnakeBounds, Snake.Player.YLocation);
             Grid.SetColumn(Snake.Player.SnakeBounds, Snake.Player.XLocation);
+
+            Grow();
+            Grow();
+            Grow();
+
         }
 
         private void Grow()
         {
             if(Snake.Body.Count == 0)
             {
-
+                SnakeBody newBody = new SnakeBody(Snake.Player.XLocation, Snake.Player.YLocation, Snake.Player.XSpeed, Snake.Player.YSpeed);
+                GameGrid.Children.Add(newBody.SnakeBounds);
+                Snake.Body.Add(newBody);
             }
             else
             {
-
+                SnakeBody lastBody = Snake.Body[Snake.Body.Count - 1];
+                SnakeBody newBody = new SnakeBody(lastBody.XLocation, lastBody.YLocation, lastBody.XSpeed, lastBody.YSpeed);
+                GameGrid.Children.Add(newBody.SnakeBounds);
+                Snake.Body.Add(newBody);
             }
         }
     }
