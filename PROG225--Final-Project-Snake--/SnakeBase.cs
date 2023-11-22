@@ -11,8 +11,8 @@ namespace PROG225__Final_Project_Snake__
 {
     public class SnakeBase
     {
-        public int XLocation { get; set; } = 0;
-        public int YLocation { get; set; } = 0;
+        public int XLocation { get; set; }
+        public int YLocation { get; set; }
         public int XSpeed { get; set; } = 1;
         public int YSpeed { get; set; } = 0;
         public Grid? SnakeBounds { get; set; }

@@ -44,15 +44,14 @@ namespace PROG225__Final_Project_Snake__
 
             Snake.Player = new SnakeHead(startX, startY);
 
-            GameGrid.Children.Add(Snake.Player.SnakeBounds);
-
             Grid.SetRow(Snake.Player.SnakeBounds, Snake.Player.YLocation);
             Grid.SetColumn(Snake.Player.SnakeBounds, Snake.Player.XLocation);
 
-            Grow();
-            Grow();
-            Grow();
+            GameGrid.Children.Add(Snake.Player.SnakeBounds);
 
+            Grow();
+            Grow();
+            Grow();
         }
 
         private void Grow()
