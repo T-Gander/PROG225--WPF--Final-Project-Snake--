@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,7 @@ namespace PROG225__Final_Project_Snake__
                     {
                         body.XSpeed = XSpeed;
                         body.YSpeed = YSpeed;
+                        Debug.WriteLine("You hit a node");
                     }
                 });
             }

@@ -1,14 +1,10 @@
 ﻿using PROG225__Final_Project_Snake__.Pages;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace PROG225__Final_Project_Snake__
 {
@@ -21,6 +17,9 @@ namespace PROG225__Final_Project_Snake__
         public static Window? MainWindow { get; set; }
         public static Brush GameBackground { get; set; } = Brushes.DimGray;
         public static Timer? MovementTimer;
+        public enum MovementDirection { Left, Right, Up, Down, None }
+
+        public static MovementDirection MoveDirection { get; set; } = MovementDirection.None;
 
         public enum Difficulty { Easy, Normal, Hard }
 
@@ -49,12 +48,57 @@ namespace PROG225__Final_Project_Snake__
             MovementTimer.Start();
         }
 
+        public static void HandleInput()
+        {
+            switch (MoveDirection)
+            {
+                case MovementDirection.Up:
+                    if (Snake.Player.YSpeed != 1)
+                    {
+                        Snake.Player.XSpeed = 0;
+                        Snake.Player.YSpeed = -1;
+                        Snake.CreateSnakeNode();
+                    }
+                    break;
+
+                case MovementDirection.Down:
+                    if (Snake.Player.YSpeed != -1)
+                    {
+                        Snake.Player.XSpeed = 0;
+                        Snake.Player.YSpeed = 1;
+                        Snake.CreateSnakeNode();
+                    }
+                    break;
+
+                case MovementDirection.Left:
+                    if (Snake.Player.XSpeed != 1)
+                    {
+                        Snake.Player.YSpeed = 0;
+                        Snake.Player.XSpeed = -1;
+                        Snake.CreateSnakeNode();
+                    }
+                    break;
+
+                case MovementDirection.Right:
+                    if (Snake.Player.XSpeed != -1)
+                    {
+                        Snake.Player.XSpeed = 1;
+                        Snake.Player.YSpeed = 0;
+                        Snake.CreateSnakeNode();
+                    }
+                    break;
+
+                default: break;
+            }
+        }
+
         private static void MovementTimer_Tick(object? sender, EventArgs e)
         {
             if (MovementEvent != null)
             {
                 Application.Current.Dispatcher.Invoke(MovementEvent);
             }
+            MoveDirection = MovementDirection.None;
         }
 
         public static void UpdateContent() 
