@@ -22,16 +22,25 @@ namespace PROG225__Final_Project_Snake__.Pages
     /// </summary>
     public partial class GameOverScreen : Page
     {
-
+        public static StringBuilder PlayerName = new StringBuilder();
         public GameOverScreen(int score)
         {
             InitializeComponent();
 
-            GameController.CreateGameOverTimer();
-            GameController.GameOverLabelsTimer!.Elapsed += FlashingLabel;
+            GameController.CreateGameOverTimers();
+            GameController.GameOverContinue!.Elapsed += FlashingLabel;
+            GameController.GameOverLabelsTimer!.Elapsed += UpdatePlayerNameLabel;
 
             Background = GameController.GameBackground;
             lblScore.Content = $"Score: {score}";
+        }
+
+        private void UpdatePlayerNameLabel(object? sender, ElapsedEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                lblPlayerName.Content = $"Name: {PlayerName}_";
+            }));
         }
 
         public void FlashingLabel(object? sender, ElapsedEventArgs e)

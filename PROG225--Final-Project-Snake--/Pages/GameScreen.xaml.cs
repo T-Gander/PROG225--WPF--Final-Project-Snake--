@@ -27,7 +27,7 @@ namespace PROG225__Final_Project_Snake__
         public GameScreen()
         {
             InitializeComponent();
-            GameController.CreateTimer();
+            GameController.CreateMovementTimer();
 
             Content = GameGrid;
             BuildSnake();

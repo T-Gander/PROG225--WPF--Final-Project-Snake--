@@ -24,7 +24,7 @@ namespace PROG225__Final_Project_Snake__
             {
                 if(body.XLocation == XLocation && body.YLocation == YLocation)
                 {
-                    GameController.GameOver();
+                    GameController.SetGameOver();
                 }
             });
         }
@@ -34,9 +34,11 @@ namespace PROG225__Final_Project_Snake__
             XLocation += XSpeed;
             YLocation += YSpeed;
 
+            //Annoying that I had to add this in the middle of the method...
+
             if (XLocation == GameScreen.GameGrid.ColumnDefinitions.Count || YLocation == GameScreen.GameGrid.RowDefinitions.Count || XLocation == -1 || YLocation == -1)
             {
-                GameController.GameOver();
+                GameController.SetGameOver();
                 return;
             }
 

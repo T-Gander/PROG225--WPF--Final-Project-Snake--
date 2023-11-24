@@ -39,7 +39,8 @@
                VerticalAlignment="Center"
                FontSize="30"/>
 
-        <Label Content="Name: _" 
+        <Label x:Name="lblPlayerName"
+            Content="Name: _" 
                Foreground="Red" 
                Grid.Row="2" 
                Grid.Column="1" 

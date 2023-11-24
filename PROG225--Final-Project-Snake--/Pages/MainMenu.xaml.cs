@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -11,18 +12,19 @@ namespace PROG225__Final_Project_Snake__.Pages
     /// </summary>
     public partial class MainMenu : Page
     {
-        private static DispatcherTimer? videoTimer;
+        private static Timer? videoTimer;
         private int videoCount = 0;
 
         public MainMenu()
         {
             InitializeComponent();
             backgroundVideo.Play();
-            videoTimer = new DispatcherTimer();
-            videoTimer.Interval = new TimeSpan(0,0,1);
-            videoTimer.Tick += VideoTimer_Tick;
+            videoTimer = new Timer();
+            videoTimer.Interval = 1000;
+            videoTimer.Elapsed += VideoTimer_Tick;
             videoTimer.Start();
             GameController.MovementEvent += Snake.HandleInput;
+            
         }
 
         private void VideoTimer_Tick(object? sender, EventArgs e)
@@ -40,7 +42,9 @@ namespace PROG225__Final_Project_Snake__.Pages
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            GameController.MainWindow!.UpdateContent(new GameScreen());
+            GameScreen newGameScreen = new GameScreen();
+            GameController.CurrentGameScreen = newGameScreen;
+            GameController.MainWindow!.UpdateContent(newGameScreen);
             backgroundVideo.Stop();
             videoTimer!.Stop();
         }

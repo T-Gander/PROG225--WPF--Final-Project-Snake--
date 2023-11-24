@@ -20,9 +20,11 @@ namespace PROG225__Final_Project_Snake__
 
         private static int foodSpawnCounter;
 
+        public static Page? CurrentGameScreen;
+
         public static MainWindow? MainWindow { get; set; }
         public static Brush GameBackground { get; set; } = Brushes.LightGray;
-        public static Timer? MovementTimer, FoodTimer, InputTimer, GameOverLabelsTimer;
+        public static Timer? MovementTimer, FoodTimer, InputTimer, GameOverLabelsTimer, GameOverContinue;
 
         public enum MovementDirection { Left, Right, Up, Down, None }
 
@@ -32,7 +34,7 @@ namespace PROG225__Final_Project_Snake__
 
         public static Difficulty GameDifficulty { get; set; } = Difficulty.Normal;
 
-        private static bool gameOver = false;
+        public static bool GameOver = false;
 
         public static int Score = 0;
 
@@ -49,7 +51,7 @@ namespace PROG225__Final_Project_Snake__
             };
         }
 
-        public static void CreateTimer()
+        public static void CreateMovementTimer()
         {
             MovementTimer = new Timer();
             MovementTimer.Interval = GetDifficulty();
@@ -57,11 +59,24 @@ namespace PROG225__Final_Project_Snake__
             MovementTimer.Start();
         }
 
-        public static void CreateGameOverTimer()
+        private static void MovementTimer_Tick(object? sender, EventArgs e)
         {
-            GameOverLabelsTimer = new Timer();
-            GameOverLabelsTimer.Interval = 800;
-            GameOverLabelsTimer.Start();
+            if (CollisionEvent != null)
+            {
+                Application.Current.Dispatcher.Invoke(CollisionEvent);
+            }
+
+            if (MovementEvent != null && GameOver != true)
+            {
+                Application.Current.Dispatcher.Invoke(MovementEvent);
+            }
+
+            MoveDirection = MovementDirection.None;
+
+            if (GameOver)
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() => MainWindow!.UpdateContent(new GameOverScreen(Score))));
+            }
         }
 
         public static void CreateFoodTimer()
@@ -82,34 +97,17 @@ namespace PROG225__Final_Project_Snake__
             foodSpawnCounter++;
         }
 
-        private static void MovementTimer_Tick(object? sender, EventArgs e)
+        public static void CreateGameOverTimers()
         {
-            //if(foodSpawnCounter == 20)
-            //{
-            //    foodSpawnCounter = 0;
-            //    Application.Current.Dispatcher.Invoke(new Action(() => GameScreen.SpawnFood()));
-            //}
+            GameOverLabelsTimer = new Timer();
+            GameOverLabelsTimer.Interval = 100;
+            GameOverLabelsTimer.Start();
 
-            if (CollisionEvent != null)
-            {
-                Application.Current.Dispatcher.Invoke(CollisionEvent);
-            }
-
-            if (MovementEvent != null && gameOver != true)
-            {
-                Application.Current.Dispatcher.Invoke(MovementEvent);
-            }
-
-            //foodSpawnCounter++;
-
-            MoveDirection = MovementDirection.None;
-
-            if (gameOver)
-            {
-                Application.Current.Dispatcher.Invoke(new Action(() => MainWindow!.UpdateContent(new GameOverScreen(Score))));
-            }
+            GameOverContinue = new Timer();
+            GameOverContinue.Interval = 800;
+            GameOverContinue.Start();
         }
-
+        
         public static Grid BuildGameGrid()
         {
             Grid newGrid = new Grid();
@@ -130,9 +128,9 @@ namespace PROG225__Final_Project_Snake__
             return newGrid;
         }
 
-        public static void GameOver()
+        public static void SetGameOver()
         {
-            gameOver = true;
+            GameOver = true;
             MovementTimer!.Stop();
         }
     }
