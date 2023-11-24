@@ -18,6 +18,25 @@ namespace PROG225__Final_Project_Snake__
             MovementEvent += HandleInput;
         }
 
+        public static void Grow()
+        {
+            Score++;
+
+            if (Body.Count == 0)
+            {
+                SnakeBody newBody = new SnakeBody(PlayerHead!.XLocation, PlayerHead.YLocation, PlayerHead.XSpeed, PlayerHead.YSpeed);
+                GameScreen.GameGrid.Children.Add(newBody.SnakeBounds);
+                Body.Add(newBody);
+            }
+            else
+            {
+                SnakeBody lastBody = Body[Body.Count - 1];
+                SnakeBody newBody = new SnakeBody(lastBody.XLocation, lastBody.YLocation, lastBody.XSpeed, lastBody.YSpeed);
+                GameScreen.GameGrid.Children.Add(newBody.SnakeBounds);
+                Body.Add(newBody);
+            }
+        }
+
         public static void CreateSnakeNode()
         {
             SnakeNode snakeNode = new SnakeNode(PlayerHead!.XLocation, PlayerHead!.YLocation, PlayerHead!.XSpeed, PlayerHead!.YSpeed);

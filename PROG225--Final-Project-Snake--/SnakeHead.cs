@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 
 namespace PROG225__Final_Project_Snake__
 {
@@ -13,6 +14,18 @@ namespace PROG225__Final_Project_Snake__
             SnakeBounds = BuildBody();
             XLocation = x;
             YLocation = y;
+            GameController.CollisionEvent += CheckCollision;
+        }
+
+        private void CheckCollision()
+        {
+            Snake.Body.ForEach(body =>
+            {
+                if(body.XLocation == XLocation && body.YLocation == YLocation)
+                {
+                    GameController.GameOver();
+                }
+            });
         }
     }
 }

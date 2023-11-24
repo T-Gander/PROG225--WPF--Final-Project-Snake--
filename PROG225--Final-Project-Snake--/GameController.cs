@@ -29,6 +29,10 @@ namespace PROG225__Final_Project_Snake__
 
         public static Difficulty GameDifficulty { get; set; } = Difficulty.Normal;
 
+        private static bool gameOver = false;
+
+        public static int Score = 0;
+
         private static double GetDifficulty()
         {
             //Weird intellisense suggestion to shorten switch statement?
@@ -63,7 +67,7 @@ namespace PROG225__Final_Project_Snake__
                 Application.Current.Dispatcher.Invoke(CollisionEvent);
             }
 
-            if (MovementEvent != null)
+            if (MovementEvent != null && gameOver != true)
             {
                 Application.Current.Dispatcher.Invoke(MovementEvent);
             }
@@ -100,6 +104,7 @@ namespace PROG225__Final_Project_Snake__
 
         public static void GameOver()
         {
+            gameOver = true;
             MovementTimer!.Stop();
         }
 

@@ -39,6 +39,7 @@ namespace PROG225__Final_Project_Snake__
 
             Grid.SetColumn(SnakeBounds, XLocation);
             Grid.SetRow(SnakeBounds, YLocation);
+            Grid.SetZIndex(SnakeBounds, 1);
         }
     }
 }

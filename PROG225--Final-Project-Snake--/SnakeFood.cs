@@ -23,8 +23,10 @@ namespace PROG225__Final_Project_Snake__
 
             Grid.SetColumn(SnakeBounds!, XLocation);
             Grid.SetRow(SnakeBounds!, YLocation);
+            Grid.SetZIndex(SnakeBounds!, 0);
 
             GameScreen.GameGrid.Children.Add(SnakeBounds);
+            
             GameController.CollisionEvent += CheckForCollision;
         }
 
@@ -37,9 +39,9 @@ namespace PROG225__Final_Project_Snake__
         {
             if(Snake.PlayerHead!.XLocation == XLocation && Snake.PlayerHead!.YLocation == YLocation) 
             {
-                GameController.CollisionEvent -= CheckForCollision;
+                Snake.Grow();
                 GameScreen.GameGrid.Children.Remove(SnakeBounds);
-                GameScreen.Grow();
+                GameController.CollisionEvent -= CheckForCollision;
             }
         }
     }

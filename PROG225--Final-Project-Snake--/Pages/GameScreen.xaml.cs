@@ -48,31 +48,16 @@ namespace PROG225__Final_Project_Snake__
 
             GameGrid.Children.Add(Snake.PlayerHead.SnakeBounds);
 
-            Grow();
-            Grow();
-            Grow();
+            Snake.Grow();
+            Snake.Grow();
+            Snake.Grow();
 
             SpawnFood();
             SpawnFood();
             SpawnFood();
         }
 
-        public static void Grow()
-        {
-            if(Snake.Body.Count == 0)
-            {
-                SnakeBody newBody = new SnakeBody(Snake.PlayerHead.XLocation, Snake.PlayerHead.YLocation, Snake.PlayerHead.XSpeed, Snake.PlayerHead.YSpeed);
-                GameGrid.Children.Add(newBody.SnakeBounds);
-                Snake.Body.Add(newBody);
-            }
-            else
-            {
-                SnakeBody lastBody = Snake.Body[Snake.Body.Count - 1];
-                SnakeBody newBody = new SnakeBody(lastBody.XLocation, lastBody.YLocation, lastBody.XSpeed, lastBody.YSpeed);
-                GameGrid.Children.Add(newBody.SnakeBounds);
-                Snake.Body.Add(newBody);
-            }
-        }
+        
 
         public static SnakeFood SpawnFood()
         {
