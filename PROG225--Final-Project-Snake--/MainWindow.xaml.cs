@@ -25,8 +25,13 @@ namespace PROG225__Final_Project_Snake__
         {
             InitializeComponent();
             GameController.MainWindow = this;
-            GameController.UpdateContent();
+            UpdateContent(new MainMenu());
             PreviewKeyDown += GameScreen_KeyDown;
+        }
+
+        public void UpdateContent(Page content)
+        {
+            Content = content;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

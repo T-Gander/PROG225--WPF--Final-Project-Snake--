@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace PROG225__Final_Project_Snake__
 {
@@ -16,7 +17,7 @@ namespace PROG225__Final_Project_Snake__
         public SnakeFood() 
         {
             Random random = new Random();
-            SnakeBounds!.Background = Brushes.Yellow;
+            SnakeBounds!.Background = Brushes.Red;
 
             XLocation = random.Next(gridColumns);
             YLocation = random.Next(gridRows);
@@ -40,6 +41,7 @@ namespace PROG225__Final_Project_Snake__
             if(Snake.PlayerHead!.XLocation == XLocation && Snake.PlayerHead!.YLocation == YLocation) 
             {
                 Snake.Grow();
+                GameController.Score++;
                 GameScreen.GameGrid.Children.Remove(SnakeBounds);
                 GameController.CollisionEvent -= CheckForCollision;
             }

@@ -22,17 +22,14 @@ namespace PROG225__Final_Project_Snake__
     /// </summary>
     public partial class GameScreen : Page
     {
-        public static Grid GameGrid;
+        public static Grid GameGrid = GameController.BuildGameGrid();
 
         public GameScreen()
         {
             InitializeComponent();
             GameController.CreateTimer();
 
-            GameGrid = GameController.BuildGameGrid();
-
             Content = GameGrid;
-
             BuildSnake();
         }
 
@@ -57,13 +54,9 @@ namespace PROG225__Final_Project_Snake__
             SpawnFood();
         }
 
-        
-
         public static SnakeFood SpawnFood()
         {
             return new SnakeFood();
         }
-
-        
     }
 }

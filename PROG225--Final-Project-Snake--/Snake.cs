@@ -20,8 +20,6 @@ namespace PROG225__Final_Project_Snake__
 
         public static void Grow()
         {
-            Score++;
-
             if (Body.Count == 0)
             {
                 SnakeBody newBody = new SnakeBody(PlayerHead!.XLocation, PlayerHead.YLocation, PlayerHead.XSpeed, PlayerHead.YSpeed);

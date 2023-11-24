@@ -40,8 +40,7 @@ namespace PROG225__Final_Project_Snake__.Pages
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            GameController.CurrentContent = new GameScreen();
-            GameController.UpdateContent();
+            GameController.MainWindow!.UpdateContent(new GameScreen());
             backgroundVideo.Stop();
             videoTimer!.Stop();
         }

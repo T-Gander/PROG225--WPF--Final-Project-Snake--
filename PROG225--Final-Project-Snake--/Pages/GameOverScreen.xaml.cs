@@ -18,11 +18,13 @@ namespace PROG225__Final_Project_Snake__.Pages
     /// <summary>
     /// Interaction logic for HighscoreScreen.xaml
     /// </summary>
-    public partial class HighscoreScreen : Page
+    public partial class GameOverScreen : Page
     {
-        public HighscoreScreen()
+        public GameOverScreen(int score)
         {
             InitializeComponent();
+            Background = GameController.GameBackground;
+            lblScore.Content = $"Score: {score}";
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using PROG225__Final_Project_Snake__.Pages;
 using System;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,8 +18,7 @@ namespace PROG225__Final_Project_Snake__
 
         private static int foodSpawnCounter;
 
-        public static object? CurrentContent { get; set; } = new MainMenu();
-        public static Window? MainWindow { get; set; }
+        public static MainWindow? MainWindow { get; set; }
         public static Brush GameBackground { get; set; } = Brushes.DimGray;
         public static Timer? MovementTimer;
         public enum MovementDirection { Left, Right, Up, Down, None }
@@ -75,11 +75,11 @@ namespace PROG225__Final_Project_Snake__
             foodSpawnCounter++;
 
             MoveDirection = MovementDirection.None;
-        }
 
-        public static void UpdateContent() 
-        {
-            MainWindow!.Content = CurrentContent;
+            if (gameOver)
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() => MainWindow!.UpdateContent(new GameOverScreen(Score))));
+            }
         }
 
         public static Grid BuildGameGrid()
@@ -97,7 +97,7 @@ namespace PROG225__Final_Project_Snake__
                 newGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            newGrid.Background = Brushes.Azure;
+            newGrid.Background = GameBackground;
 
             return newGrid;
         }
@@ -107,11 +107,5 @@ namespace PROG225__Final_Project_Snake__
             gameOver = true;
             MovementTimer!.Stop();
         }
-
-        public static void BuildGameOverScreen()
-        {
-
-        }
-
     }
 }

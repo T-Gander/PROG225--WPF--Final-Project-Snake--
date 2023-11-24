@@ -27,5 +27,15 @@ namespace PROG225__Final_Project_Snake__
                 }
             });
         }
+
+        protected override void Move()
+        {
+            if (XLocation > GameScreen.GameGrid.ColumnDefinitions.Count - 1 || YLocation > GameScreen.GameGrid.RowDefinitions.Count - 1
+                || XLocation < 0 || YLocation < 0)
+            {
+                GameController.GameOver();
+            }
+            base.Move();
+        }
     }
 }
