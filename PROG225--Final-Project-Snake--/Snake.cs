@@ -13,11 +13,6 @@ namespace PROG225__Final_Project_Snake__
         public static SnakeHead? PlayerHead;
         public static List<SnakeBody> Body = new List<SnakeBody>();
 
-        static Snake()
-        {
-            MovementEvent += HandleInput;
-        }
-
         public static void Grow()
         {
             if (Body.Count == 0)

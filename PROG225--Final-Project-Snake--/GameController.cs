@@ -12,15 +12,18 @@ namespace PROG225__Final_Project_Snake__
 {
     public static class GameController
     {
-        public delegate void MovementManager();
-        public static event MovementManager? MovementEvent;
-        public static event MovementManager? CollisionEvent;
+        public delegate void UIManager();
+        public static event UIManager? MovementEvent;
+        public static event UIManager? CollisionEvent;
+        public static event UIManager? LabelsEvent;
+        public static event UIManager? FoodEvent;
 
         private static int foodSpawnCounter;
 
         public static MainWindow? MainWindow { get; set; }
-        public static Brush GameBackground { get; set; } = Brushes.DimGray;
-        public static Timer? MovementTimer;
+        public static Brush GameBackground { get; set; } = Brushes.LightGray;
+        public static Timer? MovementTimer, FoodTimer, InputTimer, GameOverLabelsTimer;
+
         public enum MovementDirection { Left, Right, Up, Down, None }
 
         public static MovementDirection MoveDirection { get; set; } = MovementDirection.None;
@@ -54,13 +57,38 @@ namespace PROG225__Final_Project_Snake__
             MovementTimer.Start();
         }
 
-        private static void MovementTimer_Tick(object? sender, EventArgs e)
+        public static void CreateGameOverTimer()
         {
-            if(foodSpawnCounter == 10)
+            GameOverLabelsTimer = new Timer();
+            GameOverLabelsTimer.Interval = 800;
+            GameOverLabelsTimer.Start();
+        }
+
+        public static void CreateFoodTimer()
+        {
+            FoodTimer = new Timer();
+            FoodTimer.Interval = GetDifficulty();
+            FoodTimer.Elapsed += FoodTimer_Tick;
+            FoodTimer.Start();
+        }
+
+        private static void FoodTimer_Tick(object? sender, EventArgs e)
+        {
+            if (foodSpawnCounter == 20)
             {
                 foodSpawnCounter = 0;
-                Application.Current.Dispatcher.Invoke(new Action(() => GameScreen.SpawnFood()));
+                Application.Current.Dispatcher.Invoke(FoodEvent);
             }
+            foodSpawnCounter++;
+        }
+
+        private static void MovementTimer_Tick(object? sender, EventArgs e)
+        {
+            //if(foodSpawnCounter == 20)
+            //{
+            //    foodSpawnCounter = 0;
+            //    Application.Current.Dispatcher.Invoke(new Action(() => GameScreen.SpawnFood()));
+            //}
 
             if (CollisionEvent != null)
             {
@@ -72,7 +100,7 @@ namespace PROG225__Final_Project_Snake__
                 Application.Current.Dispatcher.Invoke(MovementEvent);
             }
 
-            foodSpawnCounter++;
+            //foodSpawnCounter++;
 
             MoveDirection = MovementDirection.None;
 

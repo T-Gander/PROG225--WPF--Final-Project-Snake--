@@ -67,7 +67,8 @@
             VerticalAlignment="Center"
             FontSize="30"/>
 
-        <Label Content="Press Space to Return to Menu" 
+        <Label x:Name="lblReturnToMenu"
+            Content="Press Space to Return to Menu" 
                Foreground="Red" 
                Grid.Row="6" 
                Grid.Column="1" 

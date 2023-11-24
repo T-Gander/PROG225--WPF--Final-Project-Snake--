@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using PROG225__Final_Project_Snake__.Pages;
+using System.Diagnostics;
 using System.Windows.Controls;
 using System.Windows.Media;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Documents;
 
 namespace PROG225__Final_Project_Snake__
@@ -30,12 +31,18 @@ namespace PROG225__Final_Project_Snake__
 
         protected override void Move()
         {
-            if (XLocation > GameScreen.GameGrid.ColumnDefinitions.Count - 1 || YLocation > GameScreen.GameGrid.RowDefinitions.Count - 1
-                || XLocation < 0 || YLocation < 0)
+            XLocation += XSpeed;
+            YLocation += YSpeed;
+
+            if (XLocation == GameScreen.GameGrid.ColumnDefinitions.Count || YLocation == GameScreen.GameGrid.RowDefinitions.Count || XLocation == -1 || YLocation == -1)
             {
                 GameController.GameOver();
+                return;
             }
-            base.Move();
+
+            Grid.SetColumn(SnakeBounds, XLocation);
+            Grid.SetRow(SnakeBounds, YLocation);
+            Grid.SetZIndex(SnakeBounds, 1);
         }
     }
 }

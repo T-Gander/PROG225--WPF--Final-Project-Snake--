@@ -31,6 +31,8 @@ namespace PROG225__Final_Project_Snake__
 
             Content = GameGrid;
             BuildSnake();
+            GameController.FoodEvent += SpawnFood;
+            GameController.CreateFoodTimer();
         }
 
         private void BuildSnake()
@@ -48,15 +50,11 @@ namespace PROG225__Final_Project_Snake__
             Snake.Grow();
             Snake.Grow();
             Snake.Grow();
-
-            SpawnFood();
-            SpawnFood();
-            SpawnFood();
         }
 
-        public static SnakeFood SpawnFood()
+        public static void SpawnFood()
         {
-            return new SnakeFood();
+            new SnakeFood();
         }
     }
 }
