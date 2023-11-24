@@ -81,13 +81,13 @@ namespace PROG225__Final_Project_Snake__
         public static Grid BuildGameGrid()
         {
             Grid newGrid = new Grid();
-            int w =80;
+            int w = 40;
             for (int i = 0; i < w; ++i)
             {
                 newGrid.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            int h = 45;
+            int h = 23;
             for(int i = 0; i<h; i++)
             {
                 newGrid.RowDefinitions.Add(new RowDefinition());

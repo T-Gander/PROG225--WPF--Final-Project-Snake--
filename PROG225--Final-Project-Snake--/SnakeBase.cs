@@ -31,7 +31,7 @@ namespace PROG225__Final_Project_Snake__
             XLocation += XSpeed;
             YLocation += YSpeed;
 
-            if(XLocation > GameScreen.GameGrid.ColumnDefinitions.Count ||  YLocation > GameScreen.GameGrid.RowDefinitions.Count
+            if(XLocation > GameScreen.GameGrid.ColumnDefinitions.Count-1 ||  YLocation > GameScreen.GameGrid.RowDefinitions.Count-1
                 || XLocation < 0 || YLocation < 0)
             {
                 GameController.GameOver();

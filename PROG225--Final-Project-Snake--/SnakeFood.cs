@@ -18,8 +18,8 @@ namespace PROG225__Final_Project_Snake__
             Random random = new Random();
             SnakeBounds!.Background = Brushes.Yellow;
 
-            XLocation = random.Next(gridColumns + 1);
-            YLocation = random.Next(gridRows + 1);
+            XLocation = random.Next(gridColumns);
+            YLocation = random.Next(gridRows);
 
             Grid.SetColumn(SnakeBounds!, XLocation);
             Grid.SetRow(SnakeBounds!, YLocation);
