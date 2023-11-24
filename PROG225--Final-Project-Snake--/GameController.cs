@@ -1,5 +1,6 @@
 ﻿using PROG225__Final_Project_Snake__.Pages;
 using System;
+using System.Diagnostics;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,9 @@ namespace PROG225__Final_Project_Snake__
     {
         public delegate void MovementManager();
         public static event MovementManager? MovementEvent;
+        public static event MovementManager? CollisionEvent;
+
+        private static int foodSpawnCounter;
 
         public static object? CurrentContent { get; set; } = new MainMenu();
         public static Window? MainWindow { get; set; }
@@ -27,17 +31,15 @@ namespace PROG225__Final_Project_Snake__
 
         private static double GetDifficulty()
         {
-            switch (GameDifficulty)
+            //Weird intellisense suggestion to shorten switch statement?
+            //this is skipping writing case each time and treating a switch like it has properties. The _ represents default.
+
+            return GameDifficulty switch
             {
-                case Difficulty.Easy:
-                    return 150;
-
-                case Difficulty.Hard:
-                    return 75;
-
-                default:
-                    return 125;
-            }
+                Difficulty.Easy => 150,
+                Difficulty.Hard => 75,
+                _ => (double)125,
+            };
         }
 
         public static void CreateTimer()
@@ -48,56 +50,26 @@ namespace PROG225__Final_Project_Snake__
             MovementTimer.Start();
         }
 
-        public static void HandleInput()
-        {
-            switch (MoveDirection)
-            {
-                case MovementDirection.Up:
-                    if (Snake.Player.YSpeed != 1)
-                    {
-                        Snake.Player.XSpeed = 0;
-                        Snake.Player.YSpeed = -1;
-                        Snake.CreateSnakeNode();
-                    }
-                    break;
-
-                case MovementDirection.Down:
-                    if (Snake.Player.YSpeed != -1)
-                    {
-                        Snake.Player.XSpeed = 0;
-                        Snake.Player.YSpeed = 1;
-                        Snake.CreateSnakeNode();
-                    }
-                    break;
-
-                case MovementDirection.Left:
-                    if (Snake.Player.XSpeed != 1)
-                    {
-                        Snake.Player.YSpeed = 0;
-                        Snake.Player.XSpeed = -1;
-                        Snake.CreateSnakeNode();
-                    }
-                    break;
-
-                case MovementDirection.Right:
-                    if (Snake.Player.XSpeed != -1)
-                    {
-                        Snake.Player.XSpeed = 1;
-                        Snake.Player.YSpeed = 0;
-                        Snake.CreateSnakeNode();
-                    }
-                    break;
-
-                default: break;
-            }
-        }
-
         private static void MovementTimer_Tick(object? sender, EventArgs e)
         {
+            if(foodSpawnCounter == 10)
+            {
+                foodSpawnCounter = 0;
+                Application.Current.Dispatcher.Invoke(new Action(() => GameScreen.SpawnFood()));
+            }
+
+            if (CollisionEvent != null)
+            {
+                Application.Current.Dispatcher.Invoke(CollisionEvent);
+            }
+
             if (MovementEvent != null)
             {
                 Application.Current.Dispatcher.Invoke(MovementEvent);
             }
+
+            foodSpawnCounter++;
+
             MoveDirection = MovementDirection.None;
         }
 
@@ -128,7 +100,13 @@ namespace PROG225__Final_Project_Snake__
 
         public static void GameOver()
         {
+            MovementTimer!.Stop();
+        }
+
+        public static void BuildGameOverScreen()
+        {
 
         }
+
     }
 }

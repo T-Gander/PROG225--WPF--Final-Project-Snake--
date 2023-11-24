@@ -23,7 +23,6 @@ namespace PROG225__Final_Project_Snake__
     public partial class GameScreen : Page
     {
         public static Grid GameGrid;
-        //private DispatcherTimer gameScreenTimer;
 
         public GameScreen()
         {
@@ -42,23 +41,27 @@ namespace PROG225__Final_Project_Snake__
             int startX = GameGrid.ColumnDefinitions.Count / 2;
             int startY = GameGrid.RowDefinitions.Count / 2;
 
-            Snake.Player = new SnakeHead(startX, startY);
+            Snake.PlayerHead = new SnakeHead(startX, startY);
 
-            Grid.SetRow(Snake.Player.SnakeBounds, Snake.Player.YLocation);
-            Grid.SetColumn(Snake.Player.SnakeBounds, Snake.Player.XLocation);
+            Grid.SetRow(Snake.PlayerHead.SnakeBounds, Snake.PlayerHead.YLocation);
+            Grid.SetColumn(Snake.PlayerHead.SnakeBounds, Snake.PlayerHead.XLocation);
 
-            GameGrid.Children.Add(Snake.Player.SnakeBounds);
+            GameGrid.Children.Add(Snake.PlayerHead.SnakeBounds);
 
             Grow();
             Grow();
             Grow();
+
+            SpawnFood();
+            SpawnFood();
+            SpawnFood();
         }
 
-        private void Grow()
+        public static void Grow()
         {
             if(Snake.Body.Count == 0)
             {
-                SnakeBody newBody = new SnakeBody(Snake.Player.XLocation, Snake.Player.YLocation, Snake.Player.XSpeed, Snake.Player.YSpeed);
+                SnakeBody newBody = new SnakeBody(Snake.PlayerHead.XLocation, Snake.PlayerHead.YLocation, Snake.PlayerHead.XSpeed, Snake.PlayerHead.YSpeed);
                 GameGrid.Children.Add(newBody.SnakeBounds);
                 Snake.Body.Add(newBody);
             }
@@ -70,5 +73,12 @@ namespace PROG225__Final_Project_Snake__
                 Snake.Body.Add(newBody);
             }
         }
+
+        public static SnakeFood SpawnFood()
+        {
+            return new SnakeFood();
+        }
+
+        
     }
 }

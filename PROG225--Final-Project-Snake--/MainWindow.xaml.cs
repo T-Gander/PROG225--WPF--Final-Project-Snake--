@@ -36,8 +36,6 @@ namespace PROG225__Final_Project_Snake__
 
         private void GameScreen_KeyDown(object sender, KeyEventArgs e)
         {
-            //Need to update code to insert a variable into the next tick to update speed, because if you are quick enough you can kill yourself.
-            //Need code to create a snake movement node after a keypress.
             switch (e.Key)
             {
                 case Key.Up:

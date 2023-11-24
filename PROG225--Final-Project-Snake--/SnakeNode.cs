@@ -23,14 +23,14 @@ namespace PROG225__Final_Project_Snake__
             XSpeed = setXSpeed;
             YSpeed = setYSpeed;
             SnakeBounds!.Background = Brushes.Transparent;
-            GameController.MovementEvent += CheckCollision;
+            GameController.CollisionEvent += CheckForCollision;
         }
 
-        private void CheckCollision()
+        private void CheckForCollision()
         {
             if(Decay == 0)
             {
-                GameController.MovementEvent -= CheckCollision;
+                GameController.CollisionEvent -= CheckForCollision;
                 GameScreen.GameGrid.Children.Remove(SnakeBounds);
             }
             else
@@ -47,7 +47,6 @@ namespace PROG225__Final_Project_Snake__
                     {
                         body.XSpeed = XSpeed;
                         body.YSpeed = YSpeed;
-                        Debug.WriteLine("You hit a node");
                     }
                 });
             }

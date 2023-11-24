@@ -11,7 +11,7 @@ namespace PROG225__Final_Project_Snake__.Pages
     /// </summary>
     public partial class MainMenu : Page
     {
-        private static DispatcherTimer videoTimer;
+        private static DispatcherTimer? videoTimer;
         private int videoCount = 0;
 
         public MainMenu()
@@ -22,8 +22,7 @@ namespace PROG225__Final_Project_Snake__.Pages
             videoTimer.Interval = new TimeSpan(0,0,1);
             videoTimer.Tick += VideoTimer_Tick;
             videoTimer.Start();
-            GameController.MovementEvent += GameController.HandleInput;
-
+            GameController.MovementEvent += Snake.HandleInput;
         }
 
         private void VideoTimer_Tick(object? sender, EventArgs e)
@@ -44,7 +43,7 @@ namespace PROG225__Final_Project_Snake__.Pages
             GameController.CurrentContent = new GameScreen();
             GameController.UpdateContent();
             backgroundVideo.Stop();
-            videoTimer.Stop();
+            videoTimer!.Stop();
         }
     }
 }
