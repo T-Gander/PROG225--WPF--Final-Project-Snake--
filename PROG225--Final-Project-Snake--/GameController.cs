@@ -1,5 +1,6 @@
 ﻿using PROG225__Final_Project_Snake__.Pages;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Timers;
@@ -25,6 +26,8 @@ namespace PROG225__Final_Project_Snake__
         public static MainWindow? MainWindow { get; set; }
         public static Brush GameBackground { get; set; } = Brushes.LightGray;
         public static Timer? MovementTimer, FoodTimer, InputTimer, GameOverLabelsTimer, GameOverContinue;
+
+        public static List<Timer?> TimerCollection = new List<Timer?>() { MovementTimer, FoodTimer, InputTimer, GameOverLabelsTimer, GameOverContinue };
 
         public enum MovementDirection { Left, Right, Up, Down, None }
 
@@ -89,7 +92,7 @@ namespace PROG225__Final_Project_Snake__
 
         private static void FoodTimer_Tick(object? sender, EventArgs e)
         {
-            if (foodSpawnCounter == 20)
+            if (foodSpawnCounter == 20 && FoodEvent != null)
             {
                 foodSpawnCounter = 0;
                 Application.Current.Dispatcher.Invoke(FoodEvent);

@@ -38,6 +38,7 @@ namespace PROG225__Final_Project_Snake__
 
             if (XLocation == GameScreen.GameGrid.ColumnDefinitions.Count || YLocation == GameScreen.GameGrid.RowDefinitions.Count || XLocation == -1 || YLocation == -1)
             {
+                GameController.MovementEvent -= Move;
                 GameController.SetGameOver();
                 return;
             }

@@ -79,5 +79,11 @@ namespace PROG225__Final_Project_Snake__
                 default: break;
             }
         }
+
+        public static void Reset()
+        {
+            PlayerHead = null;
+            Body = new List<SnakeBody>();
+        }
     }
 }

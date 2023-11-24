@@ -29,6 +29,12 @@ namespace PROG225__Final_Project_Snake__
 
         protected virtual void Move()
         {
+            if (GameController.GameOver)
+            {
+                GameController.MovementEvent -= Move;
+                return;
+            }
+
             XLocation += XSpeed;
             YLocation += YSpeed;
 

@@ -80,6 +80,7 @@ namespace PROG225__Final_Project_Snake__
 
                     case Key.Space:
                         GameController.GameOver = false;
+                        GameScreen.ResetPageContent();
                         UpdateContent(new MainMenu());
                         break;
 
