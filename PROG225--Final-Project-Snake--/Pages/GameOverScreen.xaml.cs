@@ -31,7 +31,24 @@ namespace PROG225__Final_Project_Snake__.Pages
             PlayerNameLabel = lblPlayerName;
             ReturnToMenuLabel = lblReturnToMenu;
 
-            GameController.GameOverLabelsTimer!.Start();
+            GameController.Highscores.ForEach(highscore =>
+            {
+                if(highscore.Score < GameController.Score)
+                {
+                    GameController.GameState = GameController.State.NewHighscore;
+                }
+            });
+
+            if(GameController.GameState == GameController.State.NewHighscore)
+            {
+                GameController.GameOverLabelsTimer!.Start();
+            }
+            else
+            {
+                lblMadeLeaderboard.Visibility = Visibility.Hidden;
+                PlayerNameLabel!.Visibility = Visibility.Hidden;
+            }
+
             GameController.GameOverContinue!.Start();
 
             Background = GameController.GameBackground;
@@ -40,25 +57,31 @@ namespace PROG225__Final_Project_Snake__.Pages
 
         public static void UpdatePlayerNameLabel(object? sender, ElapsedEventArgs e)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() =>
+            if(!GameController.UIThread.HasShutdownStarted)
             {
-                PlayerNameLabel!.Content = $"Name: {PlayerName}_";
-            }));
+                GameController.UIThread.Invoke(new Action(() =>
+                {
+                    PlayerNameLabel!.Content = $"Name: {PlayerName}_";
+                }));
+            }
         }
 
         public static void FlashingLabel(object? sender, ElapsedEventArgs e)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() =>
+            if (!GameController.UIThread.HasShutdownStarted)
             {
-                if (ReturnToMenuLabel!.Visibility == Visibility.Visible)
+                GameController.UIThread.Invoke(new Action(() =>
                 {
-                    ReturnToMenuLabel!.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    ReturnToMenuLabel!.Visibility = Visibility.Visible;
-                }
-            }));
+                    if (ReturnToMenuLabel!.Visibility == Visibility.Visible)
+                    {
+                        ReturnToMenuLabel!.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        ReturnToMenuLabel!.Visibility = Visibility.Visible;
+                    }
+                }));
+            }
         }
     }
 }

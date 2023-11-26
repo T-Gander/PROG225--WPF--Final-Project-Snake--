@@ -66,7 +66,7 @@
         </Viewbox>
 
         <Viewbox Grid.Column="1" Grid.Row="3" Margin="0,10,0,10">
-            <Button Content="Highscores" FontSize="20" Width="128">
+            <Button x:Name="Leaderboard" Content="Leaderboard" FontSize="20" Width="128" Click="Leaderboard_Click">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="Transparent" />

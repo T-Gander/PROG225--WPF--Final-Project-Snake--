@@ -62,10 +62,8 @@ namespace PROG225__Final_Project_Snake__
 
         public static void ResetPageContent()
         {
-
             GameGrid.Children.Clear();
             GameGrid = GameController.BuildGameGrid();
-            
         }
     }
 }

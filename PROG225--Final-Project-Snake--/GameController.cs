@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace PROG225__Final_Project_Snake__
 {
@@ -39,16 +40,17 @@ namespace PROG225__Final_Project_Snake__
         public static event UIManager? CollisionEvent;
         public static event UIManager? LabelsEvent;
         public static event UIManager? FoodEvent;
+        public static Dispatcher UIThread = Application.Current.Dispatcher;
 
         private static int foodSpawnCounter;
 
-        public static Page? CurrentGameScreen;
-
         public static MainWindow? MainWindow { get; set; }
-        public static Brush GameBackground { get; set; } = Brushes.LightGray;
+        public static Brush GameBackground { get; set; } = Brushes.DarkGray;
         public static Timer? MovementTimer, FoodTimer, InputTimer, GameOverLabelsTimer, GameOverContinue;
 
         public static List<Timer?> TimerCollection = new List<Timer?>() { MovementTimer, FoodTimer, InputTimer, GameOverLabelsTimer, GameOverContinue };
+
+        public static List<Highscore> Highscores = DatabaseManager.GetHighScores();
 
         public enum MovementDirection { Left, Right, Up, Down, None }
 
@@ -58,7 +60,7 @@ namespace PROG225__Final_Project_Snake__
 
         public static Difficulty GameDifficulty { get; set; } = Difficulty.Normal;
 
-        public enum  State { GameOver, MainMenu, Settings, Play }
+        public enum  State { GameOver, MainMenu, Settings, Play, NewHighscore }
 
         public static State GameState { get; set; } = State.MainMenu;
         
@@ -81,12 +83,12 @@ namespace PROG225__Final_Project_Snake__
         {
             if (CollisionEvent != null)
             {
-                Application.Current.Dispatcher.Invoke(CollisionEvent);
+                UIThread.Invoke(CollisionEvent);
             }
 
             if (MovementEvent != null && GameState != State.GameOver)
             {
-                Application.Current.Dispatcher.Invoke(MovementEvent);
+                UIThread.Invoke(MovementEvent);
             }
 
             MoveDirection = MovementDirection.None;
@@ -98,7 +100,7 @@ namespace PROG225__Final_Project_Snake__
                 MovementTimer!.Stop();
                 FoodTimer!.Stop();
                 Debug.WriteLine("Game Reset");
-                Application.Current.Dispatcher.Invoke(new Action(() => MainWindow!.UpdateContent(new GameOverScreen(Score))));
+                UIThread.Invoke(new Action(() => MainWindow!.UpdateContent(new GameOverScreen(Score))));
             }
         }
 
@@ -107,7 +109,7 @@ namespace PROG225__Final_Project_Snake__
             if (foodSpawnCounter == 20 && FoodEvent != null)
             {
                 foodSpawnCounter = 0;
-                Application.Current.Dispatcher.Invoke(FoodEvent);
+                UIThread.Invoke(FoodEvent);
             }
             foodSpawnCounter++;
         }

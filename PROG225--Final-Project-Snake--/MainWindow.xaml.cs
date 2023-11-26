@@ -31,6 +31,7 @@ namespace PROG225__Final_Project_Snake__
         public MainWindow()
         {
             InitializeComponent();
+            Background = GameController.GameBackground;
             GameController.MainWindow = this;
             UpdateContent(new MainMenu());
             PreviewKeyDown += GameScreen_KeyDown;
@@ -69,7 +70,7 @@ namespace PROG225__Final_Project_Snake__
                 default: break;
             }
 
-            if (GameController.GameState == GameController.State.GameOver)
+            if (GameController.GameState == GameController.State.NewHighscore)
             {
                 switch (e.Key)
                 {
@@ -79,8 +80,9 @@ namespace PROG225__Final_Project_Snake__
                         break;
 
                     case Key.Space:
+                        DatabaseManager.UpdateHighscores();
+                        GameController.Highscores = DatabaseManager.GetHighScores();
                         GameController.GameState = GameController.State.MainMenu;
-                        
                         UpdateContent(new MainMenu());
                         break;
 

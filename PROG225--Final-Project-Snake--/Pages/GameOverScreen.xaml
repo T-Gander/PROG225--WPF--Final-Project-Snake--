@@ -30,7 +30,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content="You Made The Leaderboard!" 
+        <Label x:Name="lblMadeLeaderboard"
+            Content="You Made The Leaderboard!" 
                Foreground="Red" 
                Grid.Row="0" 
                Grid.Column="1" 

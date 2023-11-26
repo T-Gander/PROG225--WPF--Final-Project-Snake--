@@ -30,7 +30,7 @@ namespace PROG225__Final_Project_Snake__.Pages
         {
             if(Visibility != Visibility.Visible)
             {
-                Application.Current.Dispatcher.Invoke(new Action(() =>          //Won't show content until the video starts playing. ChatGPT couldn't help with this problem...
+                GameController.UIThread.Invoke(new Action(() =>          //Won't show content until the video starts playing. ChatGPT couldn't help with this problem... So this is what I came up with.
                 {
                     if (backgroundVideo.Position > new TimeSpan(0, 0, 0))           
                     {
@@ -41,7 +41,7 @@ namespace PROG225__Final_Project_Snake__.Pages
             
             if(videoCount == 20)
             {
-                Application.Current.Dispatcher.Invoke(new Action(() => backgroundVideo.Position = new TimeSpan(0,0,0)));
+                GameController.UIThread.Invoke(new Action(() => backgroundVideo.Position = new TimeSpan(0,0,0)));
                 videoCount = 0;
             }
             else
@@ -53,8 +53,15 @@ namespace PROG225__Final_Project_Snake__.Pages
         private void Play_Click(object sender, RoutedEventArgs e)
         {
             GameScreen newGameScreen = new GameScreen();
-            GameController.CurrentGameScreen = newGameScreen;
             GameController.MainWindow!.UpdateContent(newGameScreen);
+            backgroundVideo.Stop();
+            videoTimer!.Stop();
+        }
+
+        private void Leaderboard_Click(object sender, RoutedEventArgs e)
+        {
+            LeaderboardScreen leaderboard = new LeaderboardScreen();
+            GameController.MainWindow!.UpdateContent(leaderboard);
             backgroundVideo.Stop();
             videoTimer!.Stop();
         }
