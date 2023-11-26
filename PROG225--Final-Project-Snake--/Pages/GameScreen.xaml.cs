@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
@@ -27,18 +28,13 @@ namespace PROG225__Final_Project_Snake__
         public GameScreen()
         {
             InitializeComponent();
+            ResetPageContent();
             GameController.Score = 0;
-            GameGrid = GameController.BuildGameGrid();
-            GameGrid.Children.Clear();
-            GameController.CreateMovementTimer();
-            
-            if(GameController.FoodTimer == null)
-            {
-                GameController.FoodEvent += SpawnFood;
-                GameController.CreateFoodTimer();
-            }
-            Content = GameGrid;
+            GameController.MovementTimer!.Start();
+            GameController.FoodTimer!.Start();
             BuildSnake();
+            Content = GameGrid;
+            GameController.GameState = GameController.State.Play;
         }
 
         private void BuildSnake()
@@ -54,6 +50,7 @@ namespace PROG225__Final_Project_Snake__
             GameGrid.Children.Add(Snake.PlayerHead.SnakeBounds);
 
             Snake.Grow();
+            Debug.WriteLine($"Starting Location is: X: {Snake.Bodys[0].XLocation} Y: {Snake.Bodys[0].YLocation}");
             Snake.Grow();
             Snake.Grow();
         }
@@ -65,10 +62,10 @@ namespace PROG225__Final_Project_Snake__
 
         public static void ResetPageContent()
         {
-            Snake.Reset();
+
             GameGrid.Children.Clear();
             GameGrid = GameController.BuildGameGrid();
-
+            
         }
     }
 }

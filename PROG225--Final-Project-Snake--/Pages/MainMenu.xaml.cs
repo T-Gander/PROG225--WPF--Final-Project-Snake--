@@ -24,7 +24,6 @@ namespace PROG225__Final_Project_Snake__.Pages
             videoTimer.Elapsed += VideoTimer_Tick;
             videoTimer.Start();
             GameController.MovementEvent += Snake.HandleInput;
-            
         }
 
         private void VideoTimer_Tick(object? sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using static PROG225__Final_Project_Snake__.GameController;
 
 namespace PROG225__Final_Project_Snake__
@@ -11,22 +12,30 @@ namespace PROG225__Final_Project_Snake__
     public static class Snake
     {
         public static SnakeHead? PlayerHead;
-        public static List<SnakeBody> Body = new List<SnakeBody>();
+        public static List<SnakeBody> Bodys = new List<SnakeBody>();
+        public static List<SnakeNode> Nodes = new List<SnakeNode>();
+        public static List<SnakeFood> Foods = new List<SnakeFood>();
 
         public static void Grow()
         {
-            if (Body.Count == 0)
+            if (Bodys.Count == 0)
             {
                 SnakeBody newBody = new SnakeBody(PlayerHead!.XLocation, PlayerHead.YLocation, PlayerHead.XSpeed, PlayerHead.YSpeed);
+                Grid.SetColumn(newBody.SnakeBounds, newBody.XLocation);
+                Grid.SetRow(newBody.SnakeBounds, newBody.YLocation);
+                Grid.SetZIndex(newBody.SnakeBounds, 1);
                 GameScreen.GameGrid.Children.Add(newBody.SnakeBounds);
-                Body.Add(newBody);
+                Bodys.Add(newBody);
             }
             else
             {
-                SnakeBody lastBody = Body[Body.Count - 1];
+                SnakeBody lastBody = Bodys[Bodys.Count - 1];
                 SnakeBody newBody = new SnakeBody(lastBody.XLocation, lastBody.YLocation, lastBody.XSpeed, lastBody.YSpeed);
+                Grid.SetColumn(newBody.SnakeBounds, newBody.XLocation);
+                Grid.SetRow(newBody.SnakeBounds, newBody.YLocation);
+                Grid.SetZIndex(newBody.SnakeBounds, 1);
                 GameScreen.GameGrid.Children.Add(newBody.SnakeBounds);
-                Body.Add(newBody);
+                Bodys.Add(newBody);
             }
         }
 
@@ -38,52 +47,62 @@ namespace PROG225__Final_Project_Snake__
 
         public static void HandleInput()
         {
-            switch (MoveDirection)
+            if(GameState == State.Play)
             {
-                case MovementDirection.Up:
-                    if (PlayerHead!.YSpeed != 1)
-                    {
-                        PlayerHead.XSpeed = 0;
-                        PlayerHead.YSpeed = -1;
-                        CreateSnakeNode();
-                    }
-                    break;
+                switch (MoveDirection)
+                {
+                    case MovementDirection.Up:
+                        if (PlayerHead!.YSpeed != 1)
+                        {
+                            PlayerHead.XSpeed = 0;
+                            PlayerHead.YSpeed = -1;
+                            CreateSnakeNode();
+                        }
+                        break;
 
-                case MovementDirection.Down:
-                    if (PlayerHead!.YSpeed != -1)
-                    {
-                        PlayerHead.XSpeed = 0;
-                        PlayerHead.YSpeed = 1;
-                        CreateSnakeNode();
-                    }
-                    break;
+                    case MovementDirection.Down:
+                        if (PlayerHead!.YSpeed != -1)
+                        {
+                            PlayerHead.XSpeed = 0;
+                            PlayerHead.YSpeed = 1;
+                            CreateSnakeNode();
+                        }
+                        break;
 
-                case MovementDirection.Left:
-                    if (PlayerHead!.XSpeed != 1)
-                    {
-                        PlayerHead.YSpeed = 0;
-                        PlayerHead.XSpeed = -1;
-                        CreateSnakeNode();
-                    }
-                    break;
+                    case MovementDirection.Left:
+                        if (PlayerHead!.XSpeed != 1)
+                        {
+                            PlayerHead.YSpeed = 0;
+                            PlayerHead.XSpeed = -1;
+                            CreateSnakeNode();
+                        }
+                        break;
 
-                case MovementDirection.Right:
-                    if (PlayerHead!.XSpeed != -1)
-                    {
-                        PlayerHead.XSpeed = 1;
-                        PlayerHead.YSpeed = 0;
-                        CreateSnakeNode();
-                    }
-                    break;
+                    case MovementDirection.Right:
+                        if (PlayerHead!.XSpeed != -1)
+                        {
+                            PlayerHead.XSpeed = 1;
+                            PlayerHead.YSpeed = 0;
+                            CreateSnakeNode();
+                        }
+                        break;
 
-                default: break;
+                    default: break;
+                }
             }
         }
 
         public static void Reset()
         {
+            MovementEvent -= PlayerHead!.Move;
+            CollisionEvent -= PlayerHead!.CheckCollision;
             PlayerHead = null;
-            Body = new List<SnakeBody>();
+            Bodys.ForEach(body => MovementEvent -= body.Move);
+            Bodys.Clear();
+            Nodes.ForEach(node => CollisionEvent -= node.CheckForCollision);
+            Nodes.Clear();
+            Foods.ForEach(food => CollisionEvent -= food.CheckForCollision);
+            Foods.Clear();
         }
     }
 }

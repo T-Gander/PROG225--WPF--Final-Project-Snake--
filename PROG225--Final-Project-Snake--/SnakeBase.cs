@@ -27,9 +27,9 @@ namespace PROG225__Final_Project_Snake__
             GameController.MovementEvent += Move;
         }
 
-        protected virtual void Move()
+        public virtual void Move()
         {
-            if (GameController.GameOver)
+            if (GameController.GameState == GameController.State.GameOver)
             {
                 GameController.MovementEvent -= Move;
                 return;

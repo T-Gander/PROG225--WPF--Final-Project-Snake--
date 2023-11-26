@@ -27,16 +27,16 @@ namespace PROG225__Final_Project_Snake__
             Grid.SetZIndex(SnakeBounds!, 0);
 
             GameScreen.GameGrid.Children.Add(SnakeBounds);
-            
             GameController.CollisionEvent += CheckForCollision;
+            Snake.Foods.Add(this);
         }
 
-        protected override void Move()
+        public override void Move()
         {
             //Don't move.
         }
 
-        private void CheckForCollision()
+        public void CheckForCollision()
         {
             if(Snake.PlayerHead!.XLocation == XLocation && Snake.PlayerHead!.YLocation == YLocation) 
             {

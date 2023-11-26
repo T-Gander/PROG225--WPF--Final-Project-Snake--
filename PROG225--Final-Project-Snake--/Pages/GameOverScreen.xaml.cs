@@ -23,37 +23,40 @@ namespace PROG225__Final_Project_Snake__.Pages
     public partial class GameOverScreen : Page
     {
         public static StringBuilder PlayerName = new StringBuilder();
+        public static Label? PlayerNameLabel, ReturnToMenuLabel;
         public GameOverScreen(int score)
         {
             InitializeComponent();
 
-            GameController.CreateGameOverTimers();
-            GameController.GameOverContinue!.Elapsed += FlashingLabel;
-            GameController.GameOverLabelsTimer!.Elapsed += UpdatePlayerNameLabel;
+            PlayerNameLabel = lblPlayerName;
+            ReturnToMenuLabel = lblReturnToMenu;
+
+            GameController.GameOverLabelsTimer!.Start();
+            GameController.GameOverContinue!.Start();
 
             Background = GameController.GameBackground;
             lblScore.Content = $"Score: {score}";
         }
 
-        private void UpdatePlayerNameLabel(object? sender, ElapsedEventArgs e)
+        public static void UpdatePlayerNameLabel(object? sender, ElapsedEventArgs e)
         {
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                lblPlayerName.Content = $"Name: {PlayerName}_";
+                PlayerNameLabel!.Content = $"Name: {PlayerName}_";
             }));
         }
 
-        public void FlashingLabel(object? sender, ElapsedEventArgs e)
+        public static void FlashingLabel(object? sender, ElapsedEventArgs e)
         {
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                if (lblReturnToMenu.Visibility == Visibility.Visible)
+                if (ReturnToMenuLabel!.Visibility == Visibility.Visible)
                 {
-                    lblReturnToMenu.Visibility = Visibility.Hidden;
+                    ReturnToMenuLabel!.Visibility = Visibility.Hidden;
                 }
                 else
                 {
-                    lblReturnToMenu.Visibility = Visibility.Visible;
+                    ReturnToMenuLabel!.Visibility = Visibility.Visible;
                 }
             }));
         }

@@ -69,7 +69,7 @@ namespace PROG225__Final_Project_Snake__
                 default: break;
             }
 
-            if (GameController.GameOver)
+            if (GameController.GameState == GameController.State.GameOver)
             {
                 switch (e.Key)
                 {
@@ -79,8 +79,8 @@ namespace PROG225__Final_Project_Snake__
                         break;
 
                     case Key.Space:
-                        GameController.GameOver = false;
-                        GameScreen.ResetPageContent();
+                        GameController.GameState = GameController.State.MainMenu;
+                        
                         UpdateContent(new MainMenu());
                         break;
 

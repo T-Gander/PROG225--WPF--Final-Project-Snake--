@@ -10,23 +10,24 @@ using System.Windows.Media;
 
 namespace PROG225__Final_Project_Snake__
 {
-    internal class SnakeNode : SnakeBase
+    public class SnakeNode : SnakeBase
     {
         public int Decay { get; set; }
         public int BodyCountOnCreation { get; set; }
         public SnakeNode(int x, int y, int setXSpeed, int setYSpeed)
         {
-            BodyCountOnCreation = Snake.Body.Count;
-            Decay = Snake.Body.Count;
+            BodyCountOnCreation = Snake.Bodys.Count;
+            Decay = Snake.Bodys.Count;
             XLocation = x;
             YLocation = y;
             XSpeed = setXSpeed;
             YSpeed = setYSpeed;
             SnakeBounds!.Background = Brushes.Transparent;
             GameController.CollisionEvent += CheckForCollision;
+            Snake.Nodes.Add(this);
         }
 
-        private void CheckForCollision()
+        public void CheckForCollision()
         {
             if(Decay == 0)
             {
@@ -35,13 +36,13 @@ namespace PROG225__Final_Project_Snake__
             }
             else
             {
-                if (Snake.Body.Count > BodyCountOnCreation)
+                if (Snake.Bodys.Count > BodyCountOnCreation)
                 {
                     BodyCountOnCreation++;
                     Decay++;
                 }
 
-                Snake.Body.ForEach(body =>
+                Snake.Bodys.ForEach(body =>
                 {
                     if (body.XLocation == XLocation && body.YLocation == YLocation)
                     {
@@ -53,7 +54,7 @@ namespace PROG225__Final_Project_Snake__
             Decay--;
         }
 
-        override protected void Move()
+        override public void Move()
         {
             //Don't move
         }

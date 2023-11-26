@@ -18,9 +18,9 @@ namespace PROG225__Final_Project_Snake__
             GameController.CollisionEvent += CheckCollision;
         }
 
-        private void CheckCollision()
+        public void CheckCollision()
         {
-            Snake.Body.ForEach(body =>
+            Snake.Bodys.ForEach(body =>
             {
                 if(body.XLocation == XLocation && body.YLocation == YLocation)
                 {
@@ -29,7 +29,7 @@ namespace PROG225__Final_Project_Snake__
             });
         }
 
-        protected override void Move()
+        public override void Move()
         {
             XLocation += XSpeed;
             YLocation += YSpeed;
@@ -38,8 +38,8 @@ namespace PROG225__Final_Project_Snake__
 
             if (XLocation == GameScreen.GameGrid.ColumnDefinitions.Count || YLocation == GameScreen.GameGrid.RowDefinitions.Count || XLocation == -1 || YLocation == -1)
             {
-                GameController.MovementEvent -= Move;
                 GameController.SetGameOver();
+                GameController.MovementEvent -= Move;
                 return;
             }
 

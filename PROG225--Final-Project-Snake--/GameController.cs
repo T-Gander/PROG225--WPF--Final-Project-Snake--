@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Timers;
 using System.Windows;
@@ -13,6 +14,26 @@ namespace PROG225__Final_Project_Snake__
 {
     public static class GameController
     {
+        static GameController()
+        {
+            MovementTimer = new Timer();
+            MovementTimer.Interval = GetDifficulty();
+            MovementTimer.Elapsed += MovementTimer_Tick;
+
+            FoodTimer = new Timer();
+            FoodTimer.Interval = GetDifficulty();
+            FoodTimer.Elapsed += FoodTimer_Tick;
+            FoodEvent += GameScreen.SpawnFood;
+
+            GameOverLabelsTimer = new Timer();
+            GameOverLabelsTimer.Interval = 100;
+            GameOverLabelsTimer.Elapsed += GameOverScreen.UpdatePlayerNameLabel;
+
+            GameOverContinue = new Timer();
+            GameOverContinue.Interval = 800;
+            GameOverContinue.Elapsed += GameOverScreen.FlashingLabel;
+        }
+
         public delegate void UIManager();
         public static event UIManager? MovementEvent;
         public static event UIManager? CollisionEvent;
@@ -37,8 +58,10 @@ namespace PROG225__Final_Project_Snake__
 
         public static Difficulty GameDifficulty { get; set; } = Difficulty.Normal;
 
-        public static bool GameOver = false;
+        public enum  State { GameOver, MainMenu, Settings, Play }
 
+        public static State GameState { get; set; } = State.MainMenu;
+        
         public static int Score = 0;
 
         private static double GetDifficulty()
@@ -54,14 +77,6 @@ namespace PROG225__Final_Project_Snake__
             };
         }
 
-        public static void CreateMovementTimer()
-        {
-            MovementTimer = new Timer();
-            MovementTimer.Interval = GetDifficulty();
-            MovementTimer.Elapsed += MovementTimer_Tick;
-            MovementTimer.Start();
-        }
-
         private static void MovementTimer_Tick(object? sender, EventArgs e)
         {
             if (CollisionEvent != null)
@@ -69,25 +84,22 @@ namespace PROG225__Final_Project_Snake__
                 Application.Current.Dispatcher.Invoke(CollisionEvent);
             }
 
-            if (MovementEvent != null && GameOver != true)
+            if (MovementEvent != null && GameState != State.GameOver)
             {
                 Application.Current.Dispatcher.Invoke(MovementEvent);
             }
 
             MoveDirection = MovementDirection.None;
 
-            if (GameOver)
+            if (GameState == State.GameOver)
             {
+                Debug.WriteLine("Resetting Game");
+                Snake.Reset();
+                MovementTimer!.Stop();
+                FoodTimer!.Stop();
+                Debug.WriteLine("Game Reset");
                 Application.Current.Dispatcher.Invoke(new Action(() => MainWindow!.UpdateContent(new GameOverScreen(Score))));
             }
-        }
-
-        public static void CreateFoodTimer()
-        {
-            FoodTimer = new Timer();
-            FoodTimer.Interval = GetDifficulty();
-            FoodTimer.Elapsed += FoodTimer_Tick;
-            FoodTimer.Start();
         }
 
         private static void FoodTimer_Tick(object? sender, EventArgs e)
@@ -100,17 +112,6 @@ namespace PROG225__Final_Project_Snake__
             foodSpawnCounter++;
         }
 
-        public static void CreateGameOverTimers()
-        {
-            GameOverLabelsTimer = new Timer();
-            GameOverLabelsTimer.Interval = 100;
-            GameOverLabelsTimer.Start();
-
-            GameOverContinue = new Timer();
-            GameOverContinue.Interval = 800;
-            GameOverContinue.Start();
-        }
-        
         public static Grid BuildGameGrid()
         {
             Grid newGrid = new Grid();
@@ -133,8 +134,7 @@ namespace PROG225__Final_Project_Snake__
 
         public static void SetGameOver()
         {
-            GameOver = true;
-            MovementTimer!.Stop();
+            GameState = State.GameOver;
         }
     }
 }
