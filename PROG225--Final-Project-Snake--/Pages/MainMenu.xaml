@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:PROG225__Final_Project_Snake__.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Snake Game PROG225">
+      Title="Snake Game PROG225" Visibility="Hidden">
 
     <Grid>
         <Grid.Background>

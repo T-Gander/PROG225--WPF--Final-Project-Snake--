@@ -28,9 +28,20 @@ namespace PROG225__Final_Project_Snake__.Pages
 
         private void VideoTimer_Tick(object? sender, EventArgs e)
         {
+            if(Visibility != Visibility.Visible)
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>          //Won't show content until the video starts playing. ChatGPT couldn't help with this problem...
+                {
+                    if (backgroundVideo.Position > new TimeSpan(0, 0, 0))           
+                    {
+                        Visibility = Visibility.Visible;
+                    }
+                }));
+            }
+            
             if(videoCount == 20)
             {
-                backgroundVideo.Position = new TimeSpan(0,0,0);
+                Application.Current.Dispatcher.Invoke(new Action(() => backgroundVideo.Position = new TimeSpan(0,0,0)));
                 videoCount = 0;
             }
             else
