@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +38,17 @@ namespace PROG225__Final_Project_Snake__.Pages
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             GameController.MainWindow!.UpdateContent(new MainMenu());
+
+            try
+            {
+                string jsonString = JsonConvert.SerializeObject(GameController.GameDifficulty);
+                File.WriteAllText(".\\DifficultySettings.json", jsonString);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Saving failed... Check logs.");
+                File.WriteAllText(".\\log.txt", ex.Message);
+            }
         }
     }
 }

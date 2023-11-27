@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 using PROG225__Final_Project_Snake__.Pages;
 
 namespace PROG225__Final_Project_Snake__
@@ -35,6 +38,7 @@ namespace PROG225__Final_Project_Snake__
             GameController.MainWindow = this;
             UpdateContent(new MainMenu());
             PreviewKeyDown += GameScreen_KeyDown;
+
         }
 
         public void UpdateContent(Page content)

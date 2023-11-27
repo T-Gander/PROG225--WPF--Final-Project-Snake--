@@ -1,7 +1,9 @@
-﻿using PROG225__Final_Project_Snake__.Pages;
+﻿using Newtonsoft.Json;
+using PROG225__Final_Project_Snake__.Pages;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Media;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -20,6 +22,19 @@ namespace PROG225__Final_Project_Snake__
     {
         static GameController()
         {
+            try
+            {
+                if (File.Exists(".\\DifficultySettings.json"))
+                {
+                    string jsonString = File.ReadAllText(".\\DifficultySettings.json");
+                    GameDifficulty = JsonConvert.DeserializeObject<Difficulty>(jsonString);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error during deserialization: {ex.Message}");
+            }
+
             MovementTimer = new Timer();
             MovementTimer.Elapsed += MovementTimer_Tick;
 
@@ -34,20 +49,7 @@ namespace PROG225__Final_Project_Snake__
             GameOverContinue = new Timer();
             GameOverContinue.Interval = 800;
             GameOverContinue.Elapsed += GameOverScreen.FlashingLabel;
-
             
-            //BackgroundVideo = new MediaElement 
-            //{ 
-            //    Source = new Uri("Videos/static.mp4", UriKind.RelativeOrAbsolute),
-            //    Opacity = 0.9,
-            //    LoadedBehavior = MediaState.Manual,
-            //    Stretch = Stretch.Fill,
-            //    HorizontalAlignment = HorizontalAlignment.Stretch,
-            //    VerticalAlignment = VerticalAlignment.Stretch
-            //};
-            //Grid.SetColumnSpan( BackgroundVideo, 2000 );
-            //Grid.SetRowSpan(BackgroundVideo, 2000);
-            //Grid.SetZIndex(BackgroundVideo, -1);
         }
 
         public delegate void UIManager();
