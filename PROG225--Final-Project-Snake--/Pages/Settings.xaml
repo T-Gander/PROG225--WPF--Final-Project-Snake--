@@ -9,6 +9,38 @@
       Title="Settings">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Viewbox Margin="20">
+            <Button x:Name="Back" Content="Back" Click="Back_Click"/>
+        </Viewbox>
+
+        <Viewbox Grid.Column="1" Grid.ColumnSpan="3">
+            <Label Content="Settings" Foreground="Red" FontSize="5"/>
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Content="Difficulty (Score Multiplier and Game Speed)" FontSize="5" VerticalAlignment="Center"/>
+        </Viewbox>
+        <Viewbox Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" Margin="20">
+            <ComboBox x:Name="cmbDifficulty" SelectionChanged="cmbDifficulty_SelectionChanged">
+                <ComboBoxItem Content="Easy"></ComboBoxItem>
+                <ComboBoxItem Content="Normal"></ComboBoxItem>
+                <ComboBoxItem Content="Hard"></ComboBoxItem>
+            </ComboBox>
+        </Viewbox>
+
     </Grid>
 </Page>

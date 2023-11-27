@@ -57,18 +57,20 @@ namespace PROG225__Final_Project_Snake__.Pages
 
         public static void UpdatePlayerNameLabel(object? sender, ElapsedEventArgs e)
         {
-            if(!GameController.UIThread.HasShutdownStarted)
+            try
             {
                 GameController.UIThread.Invoke(new Action(() =>
                 {
                     PlayerNameLabel!.Content = $"Name: {PlayerName}_";
                 }));
             }
+            catch { }
+                
         }
 
         public static void FlashingLabel(object? sender, ElapsedEventArgs e)
         {
-            if (!GameController.UIThread.HasShutdownStarted)
+            try
             {
                 GameController.UIThread.Invoke(new Action(() =>
                 {
@@ -82,6 +84,7 @@ namespace PROG225__Final_Project_Snake__.Pages
                     }
                 }));
             }
+            catch { }
         }
     }
 }

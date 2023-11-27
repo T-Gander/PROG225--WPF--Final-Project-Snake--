@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,14 +28,26 @@ namespace PROG225__Final_Project_Snake__
 
         public GameScreen()
         {
+            GameController.GameMusic.Open(new Uri("Sounds\\retro-wave-melodie-128-bpm-8970.mp3", UriKind.RelativeOrAbsolute));
             InitializeComponent();
             ResetPageContent();
             GameController.Score = 0;
+            GameController.RefreshDifficulty();
             GameController.MovementTimer!.Start();
             GameController.FoodTimer!.Start();
             BuildSnake();
             Content = GameGrid;
             GameController.GameState = GameController.State.Play;
+            GameController.GameMusic.Play();
+            GameController.GameMusic.SpeedRatio = 0.75;
+            GameController.GameMusic.MediaEnded += GameMusic_MediaEnded;
+        }
+
+        private void GameMusic_MediaEnded(object? sender, EventArgs e)
+        {
+            GameController.GameMusic.Position = new TimeSpan(0,0,0);
+            GameController.GameMusic.SpeedRatio = GameController.GameMusic.SpeedRatio * 1.1;
+            GameController.GameMusic.Play();
         }
 
         private void BuildSnake()

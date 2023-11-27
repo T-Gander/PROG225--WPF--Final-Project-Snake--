@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Media;
+using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Timers;
@@ -10,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Xml.Linq;
 
 namespace PROG225__Final_Project_Snake__
 {
@@ -18,11 +21,9 @@ namespace PROG225__Final_Project_Snake__
         static GameController()
         {
             MovementTimer = new Timer();
-            MovementTimer.Interval = GetDifficulty();
             MovementTimer.Elapsed += MovementTimer_Tick;
 
             FoodTimer = new Timer();
-            FoodTimer.Interval = GetDifficulty();
             FoodTimer.Elapsed += FoodTimer_Tick;
             FoodEvent += GameScreen.SpawnFood;
 
@@ -33,16 +34,31 @@ namespace PROG225__Final_Project_Snake__
             GameOverContinue = new Timer();
             GameOverContinue.Interval = 800;
             GameOverContinue.Elapsed += GameOverScreen.FlashingLabel;
+
+            
+            //BackgroundVideo = new MediaElement 
+            //{ 
+            //    Source = new Uri("Videos/static.mp4", UriKind.RelativeOrAbsolute),
+            //    Opacity = 0.9,
+            //    LoadedBehavior = MediaState.Manual,
+            //    Stretch = Stretch.Fill,
+            //    HorizontalAlignment = HorizontalAlignment.Stretch,
+            //    VerticalAlignment = VerticalAlignment.Stretch
+            //};
+            //Grid.SetColumnSpan( BackgroundVideo, 2000 );
+            //Grid.SetRowSpan(BackgroundVideo, 2000);
+            //Grid.SetZIndex(BackgroundVideo, -1);
         }
 
         public delegate void UIManager();
         public static event UIManager? MovementEvent;
         public static event UIManager? CollisionEvent;
-        public static event UIManager? LabelsEvent;
         public static event UIManager? FoodEvent;
         public static Dispatcher UIThread = Application.Current.Dispatcher;
 
         private static int foodSpawnCounter;
+
+        public static MediaPlayer GameMusic = new MediaPlayer();
 
         public static MainWindow? MainWindow { get; set; }
         public static Brush GameBackground { get; set; } = Brushes.DarkGray;
@@ -77,6 +93,22 @@ namespace PROG225__Final_Project_Snake__
                 Difficulty.Hard => 75,
                 _ => (double)125,
             };
+        }
+
+        public static void AddScore()
+        {
+            _ = GameDifficulty switch
+            {
+                Difficulty.Easy => Score++,
+                Difficulty.Normal => Score += 2,
+                _ => Score += 3
+            };
+        }
+
+        public static void RefreshDifficulty()
+        {
+            MovementTimer!.Interval = GetDifficulty();
+            FoodTimer!.Interval = GetDifficulty();
         }
 
         private static void MovementTimer_Tick(object? sender, EventArgs e)

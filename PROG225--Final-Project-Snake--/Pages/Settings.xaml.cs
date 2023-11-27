@@ -23,6 +23,18 @@ namespace PROG225__Final_Project_Snake__.Pages
         public Settings()
         {
             InitializeComponent();
+            Background = GameController.GameBackground;
+            cmbDifficulty.SelectedIndex = (int)GameController.GameDifficulty;
+        }
+
+        private void cmbDifficulty_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            GameController.GameDifficulty = (GameController.Difficulty)cmbDifficulty.SelectedIndex;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            GameController.MainWindow!.UpdateContent(new MainMenu());
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -13,9 +14,12 @@ namespace PROG225__Final_Project_Snake__
     {
         int gridColumns = GameScreen.GameGrid.ColumnDefinitions.Count;
         int gridRows = GameScreen.GameGrid.RowDefinitions.Count;
+        public MediaPlayer eatFood = new MediaPlayer();
 
         public SnakeFood() 
         {
+            eatFood.Open(new Uri("Sounds\\pixel-sound-effect-3-82880.mp3", UriKind.RelativeOrAbsolute));
+
             Random random = new Random();
             SnakeBounds!.Background = Brushes.Red;
 
@@ -40,8 +44,9 @@ namespace PROG225__Final_Project_Snake__
         {
             if(Snake.PlayerHead!.XLocation == XLocation && Snake.PlayerHead!.YLocation == YLocation) 
             {
+                eatFood.Play();
                 Snake.Grow();
-                GameController.Score++;
+                GameController.AddScore();
                 GameScreen.GameGrid.Children.Remove(SnakeBounds);
                 GameController.CollisionEvent -= CheckForCollision;
             }

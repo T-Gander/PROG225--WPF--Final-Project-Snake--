@@ -29,13 +29,20 @@ namespace PROG225__Final_Project_Snake__
             }
             else
             {
-                SnakeBody lastBody = Bodys[Bodys.Count - 1];
-                SnakeBody newBody = new SnakeBody(lastBody.XLocation, lastBody.YLocation, lastBody.XSpeed, lastBody.YSpeed);
-                Grid.SetColumn(newBody.SnakeBounds, newBody.XLocation);
-                Grid.SetRow(newBody.SnakeBounds, newBody.YLocation);
-                Grid.SetZIndex(newBody.SnakeBounds, 1);
-                GameScreen.GameGrid.Children.Add(newBody.SnakeBounds);
-                Bodys.Add(newBody);
+                try
+                {
+                    SnakeBody lastBody = Bodys[Bodys.Count - 1];
+                    SnakeBody newBody = new SnakeBody(lastBody.XLocation, lastBody.YLocation, lastBody.XSpeed, lastBody.YSpeed);
+                    Grid.SetColumn(newBody.SnakeBounds, newBody.XLocation);
+                    Grid.SetRow(newBody.SnakeBounds, newBody.YLocation);
+                    Grid.SetZIndex(newBody.SnakeBounds, 1);
+                    GameScreen.GameGrid.Children.Add(newBody.SnakeBounds);
+                    Bodys.Add(newBody);
+                }
+                catch
+                {
+                    SetGameOver();
+                }
             }
         }
 

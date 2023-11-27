@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Leaderboard">
 
-    <Grid>
+    <Grid x:Name="myGrid">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -49,67 +49,67 @@
         </Viewbox>
 
         <Viewbox Grid.Row="3" Grid.Column="1">
-            <Label x:Name="lbl1" Content="1. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl1" Content="1. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="4" Grid.Column="1">
-            <Label x:Name="lbl2" Content="2. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl2" Content="2. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="5" Grid.Column="1">
-            <Label x:Name="lbl3" Content="3. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl3" Content="3. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="6" Grid.Column="1">
-            <Label x:Name="lbl4" Content="4. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl4" Content="4. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="7" Grid.Column="1" >
-            <Label x:Name="lbl5" Content="5. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl5" Content="5. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="8" Grid.Column="1" >
-            <Label x:Name="lbl6" Content="6. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl6" Content="6. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="9" Grid.Column="1" >
-            <Label x:Name="lbl7" Content="7. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl7" Content="7. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="10" Grid.Column="1" >
-            <Label x:Name="lbl8" Content="8. Name" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lbl8" Content="8. Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="3" Grid.Column="2" >
-            <Label x:Name="lblScore1" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore1" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="4" Grid.Column="2" >
-            <Label x:Name="lblScore2" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore2" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="5" Grid.Column="2" >
-            <Label x:Name="lblScore3" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore3" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="6" Grid.Column="2" >
-            <Label x:Name="lblScore4" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore4" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="7" Grid.Column="2" >
-            <Label x:Name="lblScore5" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore5" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="8" Grid.Column="2" >
-            <Label x:Name="lblScore6" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore6" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox Grid.Row="9" Grid.Column="2" >
-            <Label x:Name="lblScore7" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore7" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
 
         <Viewbox  Grid.Row="10" Grid.Column="2">
-            <Label x:Name="lblScore8" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red"/>
+            <Label x:Name="lblScore8" Content="Score: 0" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
     </Grid>
 </Page>

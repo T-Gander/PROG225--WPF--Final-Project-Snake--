@@ -10,10 +10,18 @@
 
   <ItemGroup>
     <None Remove="Images\settingscog.png" />
+    <None Remove="Sounds\pixel-sound-effect-3-82880.mp3" />
+    <None Remove="Sounds\retro-wave-melodie-128-bpm-8970.mp3" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Images\settingscog.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\pixel-sound-effect-3-82880.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\retro-wave-melodie-128-bpm-8970.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
