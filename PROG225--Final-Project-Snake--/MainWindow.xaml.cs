@@ -80,7 +80,7 @@ namespace PROG225__Final_Project_Snake__
                 {
                     case Key.Back:
                         if (GameOverScreen.PlayerName.Length > 0)
-                            GameOverScreen.PlayerName.Remove(GameOverScreen.PlayerName.Length-1, 1);
+                            GameOverScreen.PlayerName.Remove(GameOverScreen.PlayerName.Length - 1, 1);
                         break;
 
                     case Key.Space:
@@ -90,10 +90,22 @@ namespace PROG225__Final_Project_Snake__
                         UpdateContent(new MainMenu());
                         break;
 
-                    default: 
-                        if(!SpecialKeys.Contains(e.Key) && GameOverScreen.PlayerName.Length <= 6)
-                        GameOverScreen.PlayerName.Append(e.Key.ToString());
+                    default:
+                        if (!SpecialKeys.Contains(e.Key) && GameOverScreen.PlayerName.Length <= 6)
+                            GameOverScreen.PlayerName.Append(e.Key.ToString());
                         break;
+                }
+            }
+            else if (GameController.GameState == GameController.State.GameOver)
+            {
+                switch (e.Key)
+                {
+                    case Key.Space:
+                        GameController.GameState = GameController.State.MainMenu;
+                        UpdateContent(new MainMenu());
+                        break;
+
+                    default: break;
                 }
             }
         }
