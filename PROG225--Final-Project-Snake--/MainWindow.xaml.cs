@@ -92,7 +92,14 @@ namespace PROG225__Final_Project_Snake__
 
                     default:
                         if (!SpecialKeys.Contains(e.Key) && GameOverScreen.PlayerName.Length <= 6)
-                            GameOverScreen.PlayerName.Append(e.Key.ToString());
+                        {
+                            _ = e.Key switch
+                            {
+                                >= Key.D0 and <= Key.D9 => GameOverScreen.PlayerName.Append(e.Key.ToString().Substring(1)),
+                                _ => GameOverScreen.PlayerName.Append(e.Key.ToString())
+                            };
+                        }
+                            
                         break;
                 }
             }
