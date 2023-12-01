@@ -27,7 +27,7 @@ namespace PROG225__Final_Project_Snake__
         private List<Key> SpecialKeys = new List<Key> {
             Key.LeftShift,Key.RightShift,Key.LeftCtrl,Key.RightCtrl,Key.LeftAlt,Key.RightAlt,Key.F1,Key.F2,Key.F3,Key.F4,Key.F5,
             Key.F6,Key.F7,Key.F8,Key.F9,Key.F10,Key.F11,Key.F12,Key.Escape,Key.Insert,Key.Home,Key.PageUp,Key.Delete,Key.End,
-            Key.PageDown,Key.Scroll,Key.Pause,Key.Clear,Key.Tab,Key.CapsLock,Key.LWin, Key.RWin,Key.Left,Key.Right,Key.Up,Key.Down, Key.Oem3
+            Key.PageDown,Key.Scroll,Key.Pause,Key.Clear,Key.Tab,Key.CapsLock,Key.LWin, Key.RWin,Key.Left,Key.Right,Key.Up,Key.Down, Key.Oem3, Key.Return
             // Add more keys as needed
         };
 
