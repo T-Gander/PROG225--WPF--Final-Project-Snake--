@@ -27,7 +27,10 @@ namespace PROG225__Final_Project_Snake__
         private List<Key> SpecialKeys = new List<Key> {
             Key.LeftShift,Key.RightShift,Key.LeftCtrl,Key.RightCtrl,Key.LeftAlt,Key.RightAlt,Key.F1,Key.F2,Key.F3,Key.F4,Key.F5,
             Key.F6,Key.F7,Key.F8,Key.F9,Key.F10,Key.F11,Key.F12,Key.Escape,Key.Insert,Key.Home,Key.PageUp,Key.Delete,Key.End,
-            Key.PageDown,Key.Scroll,Key.Pause,Key.Clear,Key.Tab,Key.CapsLock,Key.LWin, Key.RWin,Key.Left,Key.Right,Key.Up,Key.Down, Key.Oem3, Key.Return
+            Key.PageDown,Key.Scroll,Key.Pause,Key.Clear,Key.Tab,Key.CapsLock,Key.LWin, Key.RWin,Key.Left,Key.Right,Key.Up,Key.Down, Key.Oem3, Key.Return,
+            Key.System, Key.LaunchApplication1, Key.LaunchApplication2, Key.Divide, Key.Multiply, Key.Subtract, Key.Add, Key.NumLock, Key.NumPad0,
+            Key.NumPad1,Key.NumPad2,Key.NumPad3,Key.NumPad4,Key.NumPad5,Key.NumPad6,Key.NumPad7,Key.NumPad8,Key.NumPad9, Key.Decimal, Key.Apps, Key.OemOpenBrackets,
+            Key.Oem1, Key.Oem2, Key.Oem3,Key.Oem4,Key.Oem5,Key.Oem6,Key.Oem7,Key.Oem8, Key.OemQuotes, Key.OemComma, Key.OemPeriod, Key.OemQuestion
             // Add more keys as needed
         };
 
