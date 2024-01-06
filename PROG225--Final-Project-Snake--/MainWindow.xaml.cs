@@ -37,6 +37,7 @@ namespace PROG225__Final_Project_Snake__
         public MainWindow()
         {
             InitializeComponent();
+            DatabaseManager.CheckForDatabase();
             Background = GameController.GameBackground;
             GameController.MainWindow = this;
             UpdateContent(new MainMenu());

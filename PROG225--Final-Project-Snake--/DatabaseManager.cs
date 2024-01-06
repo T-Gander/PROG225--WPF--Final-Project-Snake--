@@ -7,12 +7,79 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PROG225__Final_Project_Snake__
 {
     public class DatabaseManager
     {
         private static string connectionString = ConfigurationManager.ConnectionStrings["groupServer"].ConnectionString;
+
+        public static void CheckForDatabase()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                }
+            }
+            catch
+            {
+                BuildDatabase();
+                MessageBox.Show("Created a new database name SnakeGame on localhost,1434");
+            }
+        }
+
+        public static void BuildDatabase()
+        {
+            string createDatabaseSQL = @"
+                    CREATE database SnakeGame
+                ";
+
+            string buildSQL = @"
+
+                    USE SnakeGame
+                    CREATE TABLE [dbo].[Highscores](
+	                [Score_ID] [int] NOT NULL,
+	                [Name] [varchar](6) NOT NULL,
+	                [Score] [int] NOT NULL
+                    )
+                ";
+            string fillSQL = @"
+
+                    USE SnakeGame
+                    DECLARE @count INT = 1;
+
+                    WHILE @count < 9
+                    BEGIN
+                       INSERT INTO [dbo].[Highscores]
+                       VALUES (@count, 'AAA', 0)
+                       SET @count = @count + 1;
+                    END;";
+
+            try
+            {
+                string masterConnectionString = "server=localhost,1434;database=master;user id=sa;password=P@ssword!;encrypt=false";
+
+                using (SqlConnection conn = new SqlConnection(masterConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand databasecmd = new SqlCommand(createDatabaseSQL, conn);
+                    SqlCommand buildcmd = new SqlCommand(buildSQL, conn);
+                    SqlCommand fillcmd = new SqlCommand(fillSQL, conn);
+
+                    databasecmd.ExecuteNonQuery();
+                    buildcmd.ExecuteNonQuery();
+                    fillcmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong building the database. Make sure that you have a localhost,1434 SQL Server running. And check the connectionString credentials within App.config.");
+            }
+            
+        }
 
         public static List<Highscore> GetHighScores()
         {
